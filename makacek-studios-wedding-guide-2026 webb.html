@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makacek Studios — Wedding Planning Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body { background: #F5F0EA; color: #1a1a18; font-family: 'Jost', sans-serif; min-height: 100vh; }
+
+  .wb { max-width: 860px; margin: 0 auto; padding: 0 0 5rem; }
+
+  /* ── Header ── */
+  .wb-header { text-align: center; padding: 4rem 2rem 2.5rem; border-bottom: 1px solid #c8c0b0; }
+  .wb-studio { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: #8a8070; font-weight: 400; margin-bottom: 1.6rem; }
+  .wb-title { font-family: 'Cormorant Garamond', serif; font-size: 68px; font-weight: 300; font-style: italic; line-height: 1.0; color: #1a1a18; }
+  .wb-title strong { font-style: normal; font-weight: 500; }
+  .wb-rule { width: 40px; height: 1px; background: #c8c0b0; margin: 1.4rem auto; }
+  .wb-tagline { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: #8a8070; font-weight: 400; }
+
+  /* ── Nav ── */
+  .nav { display: flex; flex-wrap: wrap; justify-content: center; border-top: 1px solid #c8c0b0; border-bottom: 1px solid #c8c0b0; }
+  .nav-btn {
+    font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    padding: 13px 17px; border: none; background: transparent; color: #8a8070; cursor: pointer;
+    font-weight: 400; border-right: 1px solid #e0d8cc; transition: background .18s, color .18s;
+  }
+  .nav-btn:first-child { border-left: 1px solid #e0d8cc; }
+  .nav-btn:hover { background: #ede8e0; color: #1a1a18; }
+  .nav-btn.active { background: #1a1a18; color: #F5F0EA; }
+
+  /* ── Sections ── */
+  .section { display: none; padding: 3rem 2.5rem; }
+  .section.visible { display: block; }
+
+  .sec-header { text-align: center; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid #c8c0b0; }
+  .sec-num { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: #8a8070; font-weight: 400; margin-bottom: .7rem; }
+  .sec-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; font-style: italic; color: #1a1a18; line-height: 1.1; }
+  .sec-desc { font-size: 13px; color: #8a8070; margin-top: .7rem; font-weight: 300; line-height: 1.7; letter-spacing: .02em; }
+
+  /* ── Tables ── */
+  .wb-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .wb-table th {
+    font-size: 9px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; color: #8a8070;
+    padding: 8px 12px; text-align: left; border-top: 1px solid #1a1a18; border-bottom: 1px solid #1a1a18;
+  }
+  .wb-table td { padding: 9px 12px; border-bottom: 1px solid #d8d0c4; font-weight: 300; color: #1a1a18; vertical-align: top; line-height: 1.55; }
+  .wb-table tr:last-child td { border-bottom: none; }
+  .wb-table .task { font-weight: 400; }
+  .wb-table .note { font-size: 12px; color: #5a5248; font-weight: 300; }
+
+  /* ── Stat boxes ── */
+  .col2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .col3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+  .box { border: 1px solid #c8c0b0; padding: 1.25rem 1.5rem; background: #faf7f2; }
+  .box-label { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #8a8070; font-weight: 500; margin-bottom: .5rem; }
+  .box-val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #1a1a18; }
+
+  /* ── Tip ── */
+  .tip { border-left: 2px solid #1a1a18; padding: .9rem 1.25rem; margin: 1.75rem 0; background: #ede8e0; }
+  .tip-lbl { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #8a8070; font-weight: 500; margin-bottom: .4rem; }
+  .tip p { font-size: 13px; font-weight: 300; color: #5a5248; line-height: 1.65; }
+
+  /* ── Budget bar ── */
+  .bar-wrap { background: #d8d0c4; height: 2px; border-radius: 1px; overflow: hidden; margin-top: 4px; }
+  .bar-fill { height: 2px; background: #1a1a18; border-radius: 1px; }
+
+  /* ── Checklist ── */
+  .prog-wrap { background: #d8d0c4; height: 1px; margin: 1.2rem 0 .4rem; }
+  .prog-fill { height: 1px; background: #1a1a18; transition: width .4s; display: block; }
+  .prog-row { display: flex; justify-content: space-between; font-size: 11px; color: #8a8070; margin-bottom: 1.75rem; letter-spacing: .04em; }
+  .section-group { margin-bottom: 1.75rem; }
+  .group-title { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #8a8070; font-weight: 500; margin-bottom: .6rem; padding-bottom: .4rem; border-bottom: 1px solid #c8c0b0; }
+  .check-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #d8d0c4; cursor: pointer; font-size: 13px; font-weight: 300; color: #1a1a18; line-height: 1.5; transition: color .15s; user-select: none; }
+  .check-row:last-child { border-bottom: none; }
+  .check-row.done { color: #a09880; text-decoration: line-through; }
+  .chk { width: 14px; height: 14px; border: 1px solid #c8c0b0; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+  .check-row.done .chk { background: #1a1a18; border-color: #1a1a18; }
+  .chk-mark { display: none; width: 8px; height: 5px; border-left: 1.5px solid #F5F0EA; border-bottom: 1.5px solid #F5F0EA; transform: rotate(-45deg) translate(0px, -1px); }
+  .check-row.done .chk-mark { display: block; }
+
+  /* ── Season grid ── */
+  .season-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid #c8c0b0; margin-bottom: 2rem; }
+  .season { padding: 1.25rem 1rem; border-right: 1px solid #c8c0b0; }
+  .season:last-child { border-right: none; }
+  .season-name { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #8a8070; font-weight: 500; margin-bottom: .4rem; }
+  .season-months { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; font-style: italic; margin-bottom: .5rem; color: #1a1a18; }
+  .season-pros { font-size: 12px; font-weight: 300; color: #5a5248; line-height: 1.55; }
+
+  /* ── Vows ── */
+  .vow-area { width: 100%; min-height: 140px; border: 1px solid #c8c0b0; background: #faf7f2; padding: 14px; font-family: 'EB Garamond', serif; font-size: 16px; color: #1a1a18; resize: vertical; outline: none; line-height: 1.75; }
+  .vow-area:focus { border-color: #8a8070; }
+  .vow-area::placeholder { color: #b0a898; font-style: italic; }
+  .vow-lbl { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #8a8070; font-weight: 500; margin-bottom: .5rem; display: block; }
+
+  /* ── Timeline dot ── */
+  .tl-tick { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #c8c0b0; margin-right: 8px; vertical-align: middle; }
+  .tl-tick.key { background: #1a1a18; }
+
+  /* ── Status dot ── */
+  .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+  /* ── Footer ── */
+  .wb-footer { text-align: center; padding: 2.5rem; border-top: 1px solid #c8c0b0; margin: 3rem 2.5rem 0; }
+  .wb-footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: #1a1a18; margin-bottom: .4rem; }
+  .wb-footer-sub { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #8a8070; font-weight: 400; }
+  .dl-bar { background: #1a1a18; padding: 12px 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .dl-bar-text { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #d8d0c4; font-weight: 400; }
+  .dl-btn { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; color: #1a1a18; background: #F5F0EA; border: none; padding: 9px 20px; cursor: pointer; text-decoration: none; display: inline-block; transition: background .2s; }
+  .dl-btn:hover { background: #e8e2d8; }
+
+  /* ── Print ── */
+  @media print {
+    .nav { display: none; }
+    .section { display: block !important; page-break-before: always; }
+    .section:first-of-type { page-break-before: avoid; }
+    body { background: #fff; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .wb-title { font-size: 44px; }
+    .col2, .col3 { grid-template-columns: 1fr; }
+    .season-grid { grid-template-columns: 1fr 1fr; }
+    .nav-btn { font-size: 9px; padding: 11px 10px; }
+    .section { padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wb">
+
+  <!-- Download bar -->
+  <div class="dl-bar">
+    <span class="dl-bar-text">Makacek Studios &nbsp;&middot;&nbsp; Wedding Planning Guide</span>
+    <a class="dl-btn" href="https://drive.google.com/file/d/1x_ELwD8INq0uXnzj-zXIk8R8clJK-cop/view?usp=sharing" target="_blank" id="dl-link">&#8595;&nbsp; Download your copy</a>
+  </div>
+
+  <!-- ── Header ── -->
+  <div class="wb-header">
+    <p class="wb-studio">Makacek Studios</p>
+    <div class="wb-title">The<br><strong>Wedding</strong><br>Guide</div>
+    <div class="wb-rule"></div>
+    <p class="wb-tagline">Budget &nbsp;·&nbsp; Timeline &nbsp;·&nbsp; Logistics &nbsp;·&nbsp; Design</p>
+  </div>
+
+  <!-- ── Navigation ── -->
+  <div class="nav" id="nav">
+    <button class="nav-btn active" onclick="show('timeline',this)">Timeline</button>
+    <button class="nav-btn" onclick="show('foundation',this)">Foundation</button>
+    <button class="nav-btn" onclick="show('budget',this)">Budget</button>
+    <button class="nav-btn" onclick="show('checklist',this)">Checklist</button>
+    <button class="nav-btn" onclick="show('vendors',this)">Vendors</button>
+    <button class="nav-btn" onclick="show('vows',this)">Vows</button>
+    <button class="nav-btn" onclick="show('seasons',this)">Season &amp; Venue</button>
+    <button class="nav-btn" onclick="show('dayof',this)">Day-of</button>
+  </div>
+
+
+  <!-- Save badge -->
+  <div style="text-align:center;padding:7px;border-bottom:1px solid #e8e2d8">
+    <span id="save-badge" style="font-size:10px;letter-spacing:.14em;color:#8a8070;opacity:0;transition:opacity .6s">&#10003;&nbsp; Progress saved to this browser</span>
+  </div>
+  <!-- ── 01 Timeline ── -->
+  <div id="timeline" class="section visible">
+    <div class="sec-header">
+      <p class="sec-num">Section 01</p>
+      <p class="sec-title">Planning Timeline</p>
+      <p class="sec-desc">A phased roadmap — so nothing feels rushed and nothing is overlooked.</p>
+    </div>
+    <table class="wb-table">
+      <thead><tr><th style="width:130px">Timeframe</th><th>Milestone</th><th>Key tasks</th></tr></thead>
+      <tbody>
+        <tr><td class="task">12+ months</td><td class="task"><span class="tl-tick key"></span>The big decisions</td><td class="note">Set budget &amp; guest count · Book ceremony &amp; reception venue · Hire planner · Book photographer</td></tr>
+        <tr><td class="task">9–12 months</td><td class="task"><span class="tl-tick"></span>Vendors &amp; style</td><td class="note">Book caterer, florist, band/DJ · Begin dress &amp; suit shopping · Send save-the-dates</td></tr>
+        <tr><td class="task">6–9 months</td><td class="task"><span class="tl-tick"></span>Details &amp; logistics</td><td class="note">Book hair &amp; makeup · Create gift registry · Plan honeymoon · Arrange guest accommodation blocks</td></tr>
+        <tr><td class="task">4–6 months</td><td class="task"><span class="tl-tick key"></span>Invitations &amp; menu</td><td class="note">Order &amp; send invitations · Finalize catering menu &amp; cake · Order wedding bands · Schedule fittings</td></tr>
+        <tr><td class="task">2–3 months</td><td class="task"><span class="tl-tick"></span>Final confirmations</td><td class="note">Confirm all vendors in writing · Chase RSVPs · Draft seating chart · Obtain marriage licence · Write vows</td></tr>
+        <tr><td class="task">1 month</td><td class="task"><span class="tl-tick"></span>Final fittings</td><td class="note">Final dress &amp; suit fittings · Send guest count to caterer · Build day-of timeline · Break in your shoes</td></tr>
+        <tr><td class="task">1 week</td><td class="task"><span class="tl-tick"></span>Rehearsal &amp; handoffs</td><td class="note">Rehearsal &amp; rehearsal dinner · Hand vendor payments to trusted person · Pack for honeymoon</td></tr>
+        <tr><td style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;font-weight:300">The Day</td><td class="task"><span class="tl-tick key"></span>Be present</td><td class="note">You've planned everything beautifully. Let your vendors do their job. Eat. Breathe. Dance.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 02 Foundation ── -->
+  <div id="foundation" class="section">
+    <div class="sec-header">
+      <p class="sec-num">Section 02</p>
+      <p class="sec-title">The Foundation</p>
+      <p class="sec-desc">Priorities, vision, and the numbers that make everything else possible.</p>
+    </div>
+    <div class="col3" style="margin-bottom:2rem">
+      <div class="box"><p class="box-label">Total budget</p><p class="box-val">$&nbsp;_____</p></div>
+      <div class="box"><p class="box-label">Guest count</p><p class="box-val">_____</p></div>
+      <div class="box"><p class="box-label">Wedding date</p><p class="box-val" style="font-size:17px;padding-top:8px">____ / ____ / ____</p></div>
+    </div>
+    <table class="wb-table" style="margin-bottom:2rem">
+      <thead><tr><th>Vision element</th><th style="width:120px">Priority</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="task">Overall atmosphere</td><td class="note">High</td><td class="note">Intimate, romantic, celebratory...</td></tr>
+        <tr><td class="task">Venue type</td><td class="note">High</td><td class="note">Garden, ballroom, barn, destination...</td></tr>
+        <tr><td class="task">Colour palette</td><td class="note">Medium</td><td class="note">2–3 anchor colours</td></tr>
+        <tr><td class="task">Music style</td><td class="note">Medium</td><td class="note">Live band, DJ, acoustic...</td></tr>
+        <tr><td class="task">Food style</td><td class="note">Medium</td><td class="note">Plated, stations, cocktail...</td></tr>
+        <tr><td class="task">Photography style</td><td class="note">High</td><td class="note">Editorial, documentary, classic...</td></tr>
+      </tbody>
+    </table>
+    <div class="tip"><p class="tip-lbl">Start here</p><p>Before booking anything, agree on your top three non-negotiables as a couple — the things no budget cut can touch. Everything else flows from these.</p></div>
+  </div>
+
+  <!-- ── 03 Budget ── -->
+  <div id="budget" class="section">
+    <div class="sec-header">
+      <p class="sec-num">Section 03</p>
+      <p class="sec-title">Budget Tracker</p>
+      <p class="sec-desc">Typical allocation percentages for a mid-range wedding. Adjust to reflect your priorities.</p>
+    </div>
+    <div class="col3" style="margin-bottom:2.5rem">
+      <div class="box"><p class="box-label">Largest category</p><p class="box-val">Venue</p></div>
+      <div class="box"><p class="box-label">Recommended buffer</p><p class="box-val">10–15%</p></div>
+      <div class="box"><p class="box-label">Average couples overspend</p><p class="box-val">~20%</p></div>
+    </div>
+    <table class="wb-table" id="budget-table">
+      <thead><tr><th>Category</th><th style="width:55px;text-align:right">%</th><th style="width:200px">Allocation</th><th style="width:110px;text-align:right">Est. amount</th></tr></thead>
+      <tbody id="budget-body"></tbody>
+    </table>
+    <div class="tip" style="margin-top:2rem"><p class="tip-lbl">Where to invest</p><p>Prioritise photography, catering, and music — the memories and atmosphere guests carry longest. Stationery, favours, and floral accents are the easiest places to trim without guests noticing.</p></div>
+  </div>
+
+  <!-- ── 04 Checklist ── -->
+  <div id="checklist" class="section">
+    <div class="sec-header">
+      <p class="sec-num">Section 04</p>
+      <p class="sec-title">Master Checklist</p>
+      <p class="sec-desc">Click any item to mark it complete. Track your progress below.</p>
+    </div>
+    <div class="prog-wrap"><span class="prog-fill" id="prog" style="width:0%"></span></div>
+    <div class="prog-row"><span id="prog-lbl">0 of 36 complete</span><span id="prog-pct">0%</span></div>
+    <div id="cl"></div>
+  </div>
+
+  <!-- ── 05 Vendors ── -->
+  <div id="vendors" class="section">
+    <div class="sec-header">
+      <p class="sec-num">Section 05</p>
+      <p class="sec-title">Vendor Tracker</p>
+      <p class="sec-desc">Every vendor you'll need — with priority level and key questions to ask.</p>
+    </div>
+    <table class="wb-table">
+      <thead><tr><th>Vendor</th><th style="width:95px">Priority</th><th style="width:120px">Status</th><th>Key question</th></tr></thead>
+      <tbody id="vendor-body"></tbody>
+    </table>
+    <div class="tip" style="margin-top:2rem"><p class="tip-lbl">Always get it in writing</p><p>Every vendor needs a signed contract specifying deliverables, cancellation terms, overtime fees, and a backup plan. No contract = no booking.</p></div>
+  </div>
+
+  <!-- ── 06 Vows ── -->
+  <div id="vows" class="section">
+    <div class="sec-header">
+      <p class="sec-num">Section 06</p>
+      <p class="sec-title">The Vows</p>
+      <p class="sec-desc">Your words. Use these prompts and the writing space to find them.</p>
+    </div>
+    <table class="wb-table" style="margin-bottom:2rem">
+      <thead><tr><th>Element</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td class="task">Opening</td><td class="note">How you feel standing here, right now. One or two sentences.</td></tr>
+        <tr><td class="task">The story</td><td class="note">A single moment or memory that defined your love. Be specific — vagueness is forgettable.</td></tr>
+        <tr><td class="task">The promises</td><td class="note">3–5 personal, concrete vows. "I'll make you tea when you can't sleep" beats "I'll always be there."</td></tr>
+        <tr><td class="task">The closing</td><td class="note">Your commitment, stated simply and from the heart.</td></tr>
+        <tr><td class="task">Length</td><td class="note">1–2 minutes spoken aloud — roughly 150–250 words. Practice slowly; nerves make people rush.</td></tr>
+      </tbody>
+    </table>
+    <div class="col2" style="gap:2rem">
+      <div>
+        <label class="vow-lbl">Partner 1 — your vows</label>
+        <textarea class="vow-area" placeholder="The moment I knew you were the one..."></textarea>
+      </div>
+      <div>
+        <label class="vow-lbl">Partner 2 — your vows</label>
+        <textarea class="vow-area" placeholder="What I love most about you is..."></textarea>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#a09880;margin-top:.75rem;letter-spacing:.04em">Your vows save automatically in this browser. To back them up, copy them into a separate document.</p>
+  </div>
+
+  <!-- ── 07 Season & Venue ── -->
+  <div id="seasons" class="section">
+    <div class="sec-header">
+      <p class="sec-num">Section 07</p>
+      <p class="sec-title">Season &amp; Venue</p>
+      <p class="sec-desc">Choose the season and setting that matches your vision — each has real trade-offs.</p>
+    </div>
+    <div class="season-grid">
+      <div class="season"><p class="season-name">Spring</p><p class="season-months">Apr – Jun</p><p class="season-pros">Mild weather · blooms in season · golden light. Can be rainy — always have a backup plan.</p></div>
+      <div class="season"><p class="season-name">Summer</p><p class="season-months">Jun – Aug</p><p class="season-pros">Long days · outdoor-friendly · peak social season. Highest pricing; heat requires planning.</p></div>
+      <div class="season"><p class="season-name">Autumn</p><p class="season-months">Sep – Nov</p><p class="season-pros">Stunning foliage · cooler temps · soft golden light. Very popular — book 14+ months ahead.</p></div>
+      <div class="season"><p class="season-name">Winter</p><p class="season-months">Dec – Feb</p><p class="season-pros">Cosy &amp; dramatic · off-peak savings · candlelit atmosphere. Shorter daylight hours.</p></div>
+    </div>
+    <table class="wb-table">
+      <thead><tr><th>Venue type</th><th style="width:130px">Best for</th><th>Key question</th></tr></thead>
+      <tbody>
+        <tr><td class="task">Estate or manor house</td><td class="note">Romantic, classic</td><td class="note">Exclusive use? On-site accommodation?</td></tr>
+        <tr><td class="task">Hotel ballroom</td><td class="note">Convenience &amp; scale</td><td class="note">In-house catering only, or outside vendors allowed?</td></tr>
+        <tr><td class="task">Barn or farm</td><td class="note">Rustic, relaxed</td><td class="note">What's included? Noise curfew? Generator needed?</td></tr>
+        <tr><td class="task">Botanical garden</td><td class="note">Natural, lush, floral</td><td class="note">Indoor backup if it rains? Bug season?</td></tr>
+        <tr><td class="task">Restaurant buyout</td><td class="note">Intimate, food-forward</td><td class="note">Minimum spend? Guest cap? Decor restrictions?</td></tr>
+        <tr><td class="task">Destination / resort</td><td class="note">Memorable, multi-day</td><td class="note">Guest travel costs? Legal requirements abroad?</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 08 Day-of ── -->
+  <div id="dayof" class="section">
+    <div class="sec-header">
+      <p class="sec-num">Section 08</p>
+      <p class="sec-title">Day-of Guide</p>
+      <p class="sec-desc">The details that separate a chaotic morning from a calm, joyful one.</p>
+    </div>
+    <div class="col2" style="margin-bottom:2rem;gap:2rem">
+      <div>
+        <p class="group-title" style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#8a8070;font-weight:500;margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid #c8c0b0">Emergency kit</p>
+        <table class="wb-table">
+          <tbody>
+            <tr><td class="note">Safety pins &amp; double-sided tape</td></tr>
+            <tr><td class="note">Stain remover pen</td></tr>
+            <tr><td class="note">Pain reliever &amp; antihistamine</td></tr>
+            <tr><td class="note">Blotting papers &amp; breath mints</td></tr>
+            <tr><td class="note">Needle, thread, spare button</td></tr>
+            <tr><td class="note">Phone charger &amp; power bank</td></tr>
+            <tr><td class="note">Snacks — for both of you</td></tr>
+            <tr><td class="note">A handkerchief</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <p class="group-title" style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#8a8070;font-weight:500;margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid #c8c0b0">Sample day-of timeline</p>
+        <table class="wb-table">
+          <tbody>
+            <tr><td style="width:70px;font-size:11px;color:#8a8070">7:00 am</td><td class="note">Breakfast — eat a real one</td></tr>
+            <tr><td style="font-size:11px;color:#8a8070">8:00 am</td><td class="note">Hair &amp; makeup begins</td></tr>
+            <tr><td style="font-size:11px;color:#8a8070">11:00 am</td><td class="note">Getting dressed; first look</td></tr>
+            <tr><td style="font-size:11px;color:#8a8070">12:30 pm</td><td class="note">Wedding party portraits</td></tr>
+            <tr><td style="font-size:11px;color:#8a8070">2:00 pm</td><td class="note">Guests arrive</td></tr>
+            <tr><td style="font-size:11px;color:#8a8070">3:00 pm</td><td class="note">Ceremony</td></tr>
+            <tr><td style="font-size:11px;color:#8a8070">4:00 pm</td><td class="note">Cocktail hour</td></tr>
+            <tr><td style="font-size:11px;color:#8a8070">5:30 pm</td><td class="note">Reception dinner &amp; speeches</td></tr>
+            <tr><td style="font-size:11px;color:#8a8070">8:00 pm</td><td class="note">First dance &amp; dancing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tip"><p class="tip-lbl">The one rule</p><p>Designate one non-family person as the vendor contact for the entire day. Vendors call them — not you. This single decision changes the whole experience.</p></div>
+    <div class="tip"><p class="tip-lbl">The one moment</p><p>At some point during the reception, step outside together for two minutes — just the two of you. Look at each other. Take it in. Then go back in and celebrate with everyone who loves you.</p></div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="wb-footer">
+    <p class="wb-footer-logo">Makacek Studios</p>
+    <p class="wb-footer-sub">Toronto Wedding Photographers</p>
+    <div style="margin-top:1.5rem">
+      <a class="dl-btn" href="https://drive.google.com/file/d/1x_ELwD8INq0uXnzj-zXIk8R8clJK-cop/view?usp=sharing" target="_blank" id="dl-link-footer" style="border:1px solid #c8c0b0;background:transparent;color:#1a1a18">&#8595;&nbsp; Download your copy</a>
+    </div>
+  </div>
+
+</div><!-- /wb -->
+
+<script>
+  /* ── Storage key prefix — couples on different devices stay independent ── */
+  const SK = 'ms_wedding_';
+
+  function save(key, val) { try { localStorage.setItem(SK + key, JSON.stringify(val)); } catch(e){} }
+  function load(key, def) { try { const v = localStorage.getItem(SK + key); return v !== null ? JSON.parse(v) : def; } catch(e){ return def; } }
+
+  /* ── Navigation — remembers last tab ── */
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('visible');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    save('tab', id);
+  }
+
+  /* ── Budget ── */
+  const budgetData = [
+    { cat: 'Venue & catering', pct: 30 },
+    { cat: 'Photography & video', pct: 12 },
+    { cat: 'Music (band or DJ)', pct: 8 },
+    { cat: 'Flowers & décor', pct: 8 },
+    { cat: 'Dress, suit & attire', pct: 8 },
+    { cat: 'Rehearsal dinner', pct: 5 },
+    { cat: 'Stationery & favours', pct: 3 },
+    { cat: 'Hair & makeup', pct: 3 },
+    { cat: 'Transportation', pct: 3 },
+    { cat: 'Officiant & licence', pct: 2 },
+    { cat: 'Honeymoon (separate)', pct: 8 },
+    { cat: 'Buffer — unallocated', pct: 10 },
+  ];
+  const savedBudget = load('budget', {});
+  const bb = document.getElementById('budget-body');
+  budgetData.forEach((r, i) => {
+    const savedAmt = savedBudget[i] || '';
+    bb.innerHTML += `<tr>
+      <td class="task">${r.cat}</td>
+      <td class="note" style="text-align:right">${r.pct}%</td>
+      <td><div class="bar-wrap"><div class="bar-fill" style="width:${Math.min(r.pct * 2.8, 100)}%"></div></div></td>
+      <td class="note" style="text-align:right;padding:4px 12px">
+        <input type="text" class="budget-input" data-idx="${i}" value="${savedAmt}" placeholder="$" style="width:90px;border:none;border-bottom:1px solid #c8c0b0;background:transparent;font-family:'Jost',sans-serif;font-size:12px;color:#1a1a18;text-align:right;outline:none;padding:2px 0">
+      </td>
+    </tr>`;
+  });
+  document.getElementById('budget-body').addEventListener('input', e => {
+    if (!e.target.classList.contains('budget-input')) return;
+    const budgetVals = load('budget', {});
+    budgetVals[e.target.dataset.idx] = e.target.value;
+    save('budget', budgetVals);
+  });
+
+  /* ── Foundation fields — saves any text input in the Foundation section ── */
+  function initFoundation() {
+    const savedF = load('foundation', {});
+    document.querySelectorAll('#foundation input[data-fkey], #foundation textarea[data-fkey]').forEach(el => {
+      if (savedF[el.dataset.fkey]) el.value = savedF[el.dataset.fkey];
+      el.addEventListener('input', () => {
+        const d = load('foundation', {});
+        d[el.dataset.fkey] = el.value;
+        save('foundation', d);
+      });
+    });
+  }
+
+  /* ── Vendors ── */
+  const vendors = [
+    { name: 'Wedding planner / coordinator', pri: 'Essential', q: 'Day-of only, or full planning?' },
+    { name: 'Ceremony venue', pri: 'Essential', q: 'Exclusive? Capacity? Accessibility?' },
+    { name: 'Reception venue', pri: 'Essential', q: 'Catering in-house or outside vendors?' },
+    { name: 'Officiant', pri: 'Essential', q: 'Legal requirements in your region?' },
+    { name: 'Photographer', pri: 'Essential', q: 'Albums included? Second shooter?' },
+    { name: 'Videographer', pri: 'Recommended', q: 'Highlight reel + full film?' },
+    { name: 'Caterer', pri: 'Essential', q: 'Tastings offered? Dietary options?' },
+    { name: 'Wedding cake', pri: 'Essential', q: 'Cutting fee charged by venue?' },
+    { name: 'Florist', pri: 'Essential', q: 'Setup & breakdown included?' },
+    { name: 'Band or DJ', pri: 'Essential', q: 'How many sets? Do-not-play list?' },
+    { name: 'Hair stylist', pri: 'Essential', q: 'Trial run before the day?' },
+    { name: 'Makeup artist', pri: 'Essential', q: 'Travel fee for on-site?' },
+    { name: 'Transportation', pri: 'Recommended', q: 'Shuttle for guests too?' },
+    { name: 'Photo booth', pri: 'Optional', q: 'Props & digital prints included?' },
+    { name: 'Lighting designer', pri: 'Optional', q: 'Uplighting, monogram, or bistro?' },
+  ];
+  const statusOptions = ['To book', 'Researching', 'Booked', 'Optional'];
+  const statusColors  = { 'To book': '#c8b89a', 'Researching': '#e0c97a', 'Booked': '#8abf8a', 'Optional': '#c8c0b0' };
+  const savedVendors = load('vendors', {});
+  const vb = document.getElementById('vendor-body');
+  vendors.forEach((v, i) => {
+    const current = savedVendors[i] || (v.pri === 'Optional' ? 'Optional' : 'To book');
+    const dot = statusColors[current] || '#c8c0b0';
+    const opts = statusOptions.map(s => `<option value="${s}" ${s===current?'selected':''}>${s}</option>`).join('');
+    vb.innerHTML += `<tr>
+      <td class="task">${v.name}</td>
+      <td class="note">${v.pri}</td>
+      <td class="note">
+        <span class="status-dot vendor-dot-${i}" style="background:${dot}"></span>
+        <select data-vidx="${i}" onchange="updateVendor(this)" style="border:none;border-bottom:1px solid #c8c0b0;background:transparent;font-family:'Jost',sans-serif;font-size:12px;color:#1a1a18;outline:none;cursor:pointer">${opts}</select>
+      </td>
+      <td class="note">${v.q}</td>
+    </tr>`;
+  });
+  function updateVendor(sel) {
+    const i = sel.dataset.vidx;
+    const val = sel.value;
+    const d = load('vendors', {});
+    d[i] = val;
+    save('vendors', d);
+    document.querySelector(`.vendor-dot-${i}`).style.background = statusColors[val] || '#c8c0b0';
+  }
+
+  /* ── Checklist ── */
+  const clGroups = [
+    { title: '12+ months out', items: ['Set total budget and guest count', 'Choose your wedding date', 'Book ceremony venue', 'Book reception venue', 'Hire wedding planner (if desired)', 'Book photographer'] },
+    { title: '9–12 months out', items: ['Book caterer', 'Book band or DJ', 'Book florist', 'Begin dress and suit shopping', 'Send save-the-dates', 'Confirm wedding party'] },
+    { title: '6–9 months out', items: ['Book hair and makeup', 'Book videographer', 'Create gift registry', 'Plan and book honeymoon', 'Arrange guest accommodation block', 'Plan ceremony music and readings'] },
+    { title: '4–6 months out', items: ['Order and send invitations', 'Finalize catering menu and cake', 'Order wedding rings', 'Schedule dress fittings', 'Plan rehearsal dinner'] },
+    { title: '2–3 months out', items: ['Confirm all vendors in writing', 'Chase RSVPs and finalize guest list', 'Draft seating chart', 'Obtain marriage licence', 'Write vows', 'Book day-of transportation'] },
+    { title: '1 week out', items: ['Final dress and suit fittings', 'Send final guest count to caterer', 'Prepare day-of timeline for vendors', 'Assemble emergency kit', 'Pack for honeymoon', 'Write letters to each other'] },
+  ];
+  const savedChecks = load('checks', {});
+  let allItems = [];
+  const cl = document.getElementById('cl');
+  clGroups.forEach(g => {
+    let html = `<div class="section-group"><p class="group-title">${g.title}</p>`;
+    g.items.forEach(item => {
+      allItems.push(item);
+      const done = savedChecks[item] || false;
+      html += `<div class="check-row${done?' done':''}" onclick="toggle(this)"><div class="chk"><div class="chk-mark"></div></div><span>${item}</span></div>`;
+    });
+    html += `</div>`;
+    cl.innerHTML += html;
+  });
+  updateProg();
+
+  function toggle(el) {
+    el.classList.toggle('done');
+    const item = el.querySelector('span').textContent;
+    const d = load('checks', {});
+    d[item] = el.classList.contains('done');
+    save('checks', d);
+    updateProg();
+  }
+  function updateProg() {
+    const done = document.querySelectorAll('.check-row.done').length;
+    const total = allItems.length;
+    const pct = Math.round(done / total * 100);
+    document.getElementById('prog').style.width = pct + '%';
+    document.getElementById('prog-lbl').textContent = `${done} of ${total} complete`;
+    document.getElementById('prog-pct').textContent = pct + '%';
+  }
+
+  /* ── Vows — auto-save as they type ── */
+  function initVows() {
+    const areas = document.querySelectorAll('.vow-area');
+    const savedVows = load('vows', ['', '']);
+    areas.forEach((ta, i) => {
+      ta.value = savedVows[i] || '';
+      ta.addEventListener('input', () => {
+        const v = load('vows', ['', '']);
+        v[i] = ta.value;
+        save('vows', v);
+      });
+    });
+  }
+
+  /* ── Restore last active tab on load ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    initVows();
+    initFoundation();
+    const lastTab = load('tab', 'timeline');
+    const btn = document.querySelector(`.nav-btn[onclick*="${lastTab}"]`);
+    if (btn) show(lastTab, btn);
+
+    /* Save badge shown once per session */
+    const badge = document.getElementById('save-badge');
+    if (badge) setTimeout(() => { badge.style.opacity = '1'; setTimeout(() => { badge.style.opacity = '0'; }, 2500); }, 800);
+  });
+</script>
+</body>
+</html>
