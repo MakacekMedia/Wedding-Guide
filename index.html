@@ -8,6 +8,111 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:#F5F0EA;color:#1a1a18;font-family:'Jost',sans-serif;min-height:100vh}
+.wb{max-width:860px;margin:0 auto;padding:0 0 1.5rem}
+.wb-header{text-align:center;padding:1.5rem 2rem 1rem;border-bottom:1px solid #c8c0b0}
+.wb-studio{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8a8070;font-weight:400;margin-bottom:.75rem}
+.wb-title{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;font-style:italic;line-height:1.0;color:#1a1a18}
+.wb-title strong{font-style:normal;font-weight:500}
+.wb-rule{width:40px;height:1px;background:#c8c0b0;margin:.6rem auto}
+.wb-tagline{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8a8070;font-weight:400}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;border-top:1px solid #c8c0b0;border-bottom:1px solid #c8c0b0}
+.nav-btn{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:13px 17px;border:none;background:transparent;color:#8a8070;cursor:pointer;font-weight:400;border-right:1px solid #e0d8cc;transition:background .18s,color .18s}
+.nav-btn:first-child{border-left:1px solid #e0d8cc}
+.nav-btn:hover{background:#ede8e0;color:#1a1a18}
+.nav-btn.active{background:#1a1a18;color:#F5F0EA}
+.section{display:none;padding:1.25rem 2.5rem}
+.section.visible{display:block}
+.sec-header{text-align:center;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid #c8c0b0}
+.sec-num{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#8a8070;font-weight:400;margin-bottom:.7rem}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;font-style:italic;color:#1a1a18;line-height:1.1}
+.sec-desc{font-size:13px;color:#8a8070;margin-top:.7rem;font-weight:300;line-height:1.7}
+.wb-table{width:100%;border-collapse:collapse;font-size:13px}
+.wb-table th{font-size:9px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:#8a8070;padding:8px 12px;text-align:left;border-top:1px solid #1a1a18;border-bottom:1px solid #1a1a18}
+.wb-table td{padding:9px 12px;border-bottom:1px solid #d8d0c4;font-weight:300;color:#1a1a18;vertical-align:top;line-height:1.55}
+.wb-table tr:last-child td{border-bottom:none}
+.wb-table .task{font-weight:400}
+.wb-table .note{font-size:12px;color:#5a5248;font-weight:300}
+.col2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem}
+.box{border:1px solid #c8c0b0;padding:1.25rem 1.5rem;background:#faf7f2}
+.box-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8a8070;font-weight:500;margin-bottom:.5rem}
+.box-input{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#1a1a18;border:none;border-bottom:1px solid #c8c0b0;background:transparent;width:100%;outline:none;padding:2px 0}
+.box-input::placeholder{color:#b0a898}
+.tip{border-left:2px solid #1a1a18;padding:.75rem 1.25rem;margin:1rem 0;background:#ede8e0}
+.tip-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8a8070;font-weight:500;margin-bottom:.4rem}
+.tip p{font-size:13px;font-weight:300;color:#5a5248;line-height:1.65}
+.bar-wrap{background:#d8d0c4;height:2px;border-radius:1px;overflow:hidden;margin-top:4px}
+.bar-fill{height:2px;background:#1a1a18;border-radius:1px}
+.prog-wrap{background:#d8d0c4;height:1px;margin:1.2rem 0 .4rem}
+.prog-fill{height:1px;background:#1a1a18;transition:width .4s;display:block}
+.prog-row{display:flex;justify-content:space-between;font-size:11px;color:#8a8070;margin-bottom:1rem}
+.section-group{margin-bottom:1.25rem}
+.group-title{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#8a8070;font-weight:500;margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid #c8c0b0}
+.check-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #d8d0c4;cursor:pointer;font-size:13px;font-weight:300;color:#1a1a18;line-height:1.5;user-select:none}
+.check-row:last-child{border-bottom:none}
+.check-row.done{color:#a09880;text-decoration:line-through}
+.chk{width:14px;height:14px;border:1px solid #c8c0b0;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.check-row.done .chk{background:#1a1a18;border-color:#1a1a18}
+.chk-mark{display:none;width:8px;height:5px;border-left:1.5px solid #F5F0EA;border-bottom:1.5px solid #F5F0EA;transform:rotate(-45deg) translate(0,-1px)}
+.check-row.done .chk-mark{display:block}
+.season-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #c8c0b0;margin-bottom:2rem}
+.season{padding:1.25rem 1rem;border-right:1px solid #c8c0b0}
+.season:last-child{border-right:none}
+.season-name{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8a8070;font-weight:500;margin-bottom:.4rem}
+.season-months{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;font-style:italic;margin-bottom:.5rem;color:#1a1a18}
+.season-pros{font-size:12px;font-weight:300;color:#5a5248;line-height:1.55}
+.vow-area{width:100%;min-height:140px;border:1px solid #c8c0b0;background:#faf7f2;padding:14px;font-family:'EB Garamond',serif;font-size:16px;color:#1a1a18;resize:vertical;outline:none;line-height:1.75}
+.vow-area::placeholder{color:#b0a898;font-style:italic}
+.vow-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8a8070;font-weight:500;margin-bottom:.5rem;display:block}
+.tl-tick{display:inline-block;width:6px;height:6px;border-radius:50%;background:#c8c0b0;margin-right:8px;vertical-align:middle}
+.tl-tick.key{background:#1a1a18}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.wb-footer{text-align:center;padding:1.25rem;border-top:1px solid #c8c0b0;margin:1rem 2.5rem 0}
+.wb-footer-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;font-style:italic;color:#1a1a18;margin-bottom:.4rem}
+.wb-footer-sub{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8a8070;font-weight:400}
+.dl-bar{background:#1a1a18;padding:12px 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.dl-bar-text{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#d8d0c4;font-weight:400}
+.dl-btn{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:#1a1a18;background:#F5F0EA;border:none;padding:9px 20px;cursor:pointer;text-decoration:none;display:inline-block}
+.budget-input{width:90px;border:none;border-bottom:1px solid #c8c0b0;background:transparent;font-family:'Jost',sans-serif;font-size:12px;color:#1a1a18;text-align:right;outline:none;padding:2px 0}
+.budget-input::placeholder{color:#b0a898}
+@media(max-width:640px){.wb-title{font-size:44px}.col2,.col3{grid-template-columns:1fr}.season-grid{grid-template-columns:1fr 1fr}.nav-btn{font-size:9px;padding:11px 10px}.section{padding:2rem 1.25rem}}
+</style>
+</head>
+<body>
+<div class="wb">
+<div class="dl-bar"><span class="dl-bar-text">Makacek Studios &middot; Wedding Planning Guide</span><a class="dl-btn" href="#" onclick="downloadGuide();return false;">&darr; Download your copy</a></div>
+<div class="wb-header"><p class="wb-studio">Makacek Studios</p><div class="wb-title">The<br><strong>Wedding</strong><br>Guide</div><div class="wb-rule"></div><p class="wb-tagline">Budget &middot; Timeline &middot; Logistics &middot; Design</p></div>
+<div class="nav">
+<button class="nav-btn active" onclick="show('timeline',this)">Timeline</button>
+<button class="nav-btn" onclick="show('foundation',this)">Foundation</button>
+<button class="nav-btn" onclick="show('budget',this)">Budget</button>
+<button class="nav-btn" onclick="show('checklist',this)">Checklist</button>
+<button class="nav-btn" onclick="show('vendors',this)">Vendors</button>
+<button class="nav-btn" onclick="show('vows',this)">Vows</button>
+<button class="nav-btn" onclick="show('seasons',this)">Season &amp; Venue</button>
+<button class="nav-btn" onclick="show('dayof',this)">Day-of</button>
+</div>
+<div style="text-align:center;padding:7px;border-bottom:1px solid #e8e2d8"><span id="save-badge" style="font-size:10px;color:#8a8070;opacity:0;transition:opacity .6s">&#10003; Progress saved to this browser</span></div>
+
+<div id="timeline" class="section visible">
+<div class="sec-header"><p class="sec-num">Section 01</p><p class="sec-title">Planning Timeline</p><p class="sec-desc">A phased roadmap so nothing feels rushed and nothing is overlooked.</p></div>
+<table class="wb-table"><thead><tr><th style="width:130px">Timeframe</th><th>Milestone</th><th>Key tasks</th></tr></thead><tbody>
+<tr><td class="task">12+ months</td><td class="task"><span class="tl-tick key"></span>The big decisions</td><td class="note">Set budget &amp; guest count &middot; Book ceremony &amp; reception venue &middot; Hire planner &middot; Book photographer</td></tr>
+<tr><td class="task">9&ndash;12 months</td><td class="task"><span class="tl-tick"></span>Vendors &amp; style</td><td class="note">Book caterer, florist, band/DJ &middot; Begin dress &amp; suit shopping &middot; Send save-the-dates</td></tr>
+<tr><td class="task">6&ndash;9 months</td><td class="task"><span class="tl-tick"></span>Details &amp; logistics</td><td class="note">Book hair &amp; makeup &middot; Create gift registry &middot; Plan honeymoon &middot; Arrange guest accommodation blocks</td></tr>
+<tr><td class="task">4&ndash;6 months</td><td class="task"><span class="tl-tick key"></span>Invitations &amp; menu</td><td class="note">Order &amp; send invitations &middot; Finalize catering menu &amp; cake &middot; Order wedding bands &middot; Schedule fittings</td></tr>
+<tr><td class="task">2&ndash;3 months</td><td class="task"><span class="tl-tick"></span>Final confirmations</td><td class="note">Confirm all vendors &middot; Chase RSVPs &middot; Draft seating chart &middot; Obtain marriage licence &middot; Write vows</td></tr>
+<tr><td class="task">1 month</td><td class="task"><span class="tl-tick"></span>Final fittings</td><td class="note">Final fittings &middot; Send guest count to caterer &middot; Build day-of timeline &middot; Break in your shoes</td></tr>
+<tr><td class="task">1 week</td><td class="task"><span class="tl-tick"></span>Rehearsal &amp; handoffs</td><td class="note">Rehearsal &amp; dinner &middot; Hand vendor payments to trusted person &middot; Pack for honeymoon</td></tr><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makacek Studios — Wedding Planning Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#F5F0EA;color:#1a1a18;font-family:'Jost',sans-serif;min-height:100vh}
 .wb{max-width:860px;margin:0 auto;padding:0 0 5rem}
 .wb-header{text-align:center;padding:4rem 2rem 2.5rem;border-bottom:1px solid #c8c0b0}
 .wb-studio{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#8a8070;font-weight:400;margin-bottom:1.6rem}
